@@ -3427,6 +3427,12 @@ public final class Settings {
          */
         public static final String RECENTS_SHOW_SEARCH_BAR = "recents_show_search_bar";
 
+	/**
+         * Show mobile/wifi activity icons in statusbar bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_DATA_ACTIVITY = "status_bar_show_data_activity";
+
         /**
          * Whether to enable voice wakeup.  The value is boolean (1 or 0).
          * @hide
