@@ -27,6 +27,7 @@ public interface NetworkController {
     void removeNetworkSignalChangedCallback(NetworkSignalChangedCallback cb);
     void setWifiEnabled(boolean enabled);
     AccessPointController getAccessPointController();
+    MobileDataController getMobileDataController();
     void onUserSwitched(int newUserId);
 
     public interface NetworkSignalChangedCallback {

@@ -31,6 +31,7 @@ import com.android.systemui.qs.QSTile;
 import com.android.systemui.qs.QSTileView;
 import com.android.systemui.qs.SignalTileView;
 import com.android.systemui.statusbar.policy.NetworkController;
+import com.android.systemui.statusbar.policy.MobileDataController;
 import com.android.systemui.statusbar.policy.NetworkController.DataUsageInfo;
 import com.android.systemui.statusbar.policy.NetworkController.NetworkSignalChangedCallback;
 
@@ -48,12 +49,14 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
             .putExtra("TARGET_THEME", "Theme.Material.Settings");
 
     private final NetworkController mController;
+    private final MobileDataController mDataController;
     private final CellularDetailAdapter mDetailAdapter;
     TelephonyManager mTelephonyManager;
 
     public CellularTile(Host host) {
         super(host);
         mController = host.getNetworkController();
+	mDataController = mController.getMobileDataController();
         mDetailAdapter = new CellularDetailAdapter();
         mTelephonyManager = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
     }
@@ -84,12 +87,22 @@ public class CellularTile extends QSTile<QSTile.SignalState> {
 
     @Override
     protected void handleClick() {
+        boolean enabled = mDataController.isMobileDataEnabled();
+        if (!enabled) {
+            mDataController.setMobileDataEnabled(true);
+         } else {
+            mDataController.setMobileDataEnabled(false);
+         }
+    }
+
+    @Override
+     protected void handleSecondaryClick() {
         if (mController.isMobileDataSupported()) {
             showDetail(true);
         } else {
             mHost.startSettingsActivity(DATA_USAGE_SETTINGS);
         }
-    }
+     }
 
     @Override
     protected void handleLongClick() {

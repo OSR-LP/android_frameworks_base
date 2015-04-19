@@ -446,6 +446,11 @@ public class NetworkControllerImpl extends BroadcastReceiver
     }
 
     @Override
+    public MobileDataController getMobileDataController() {
+        return mMobileDataController;
+    }
+
+    @Override
     public boolean isMobileDataEnabled() {
         return mMobileDataController.isMobileDataEnabled();
     }
