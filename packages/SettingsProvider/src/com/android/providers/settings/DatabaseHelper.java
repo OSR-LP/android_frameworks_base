@@ -2791,8 +2791,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             loadBooleanSetting(stmt, Settings.Secure.ADVANCED_MODE,
                     com.android.internal.R.bool.config_advancedSettingsMode);
 
+            loadBooleanSetting(stmt, Settings.Secure.SPELL_CHECKER_ENABLED,
+                    R.bool.def_spell_checker);
+
             loadDefaultThemeSettings(stmt);
             loadProtectedSmsSetting(stmt);
+
+            loadStringSetting(stmt, Settings.Secure.QS_TILES,
+                    com.android.internal.R.string.config_defaultQuickSettingsTiles);
         } finally {
             if (stmt != null) stmt.close();
         }
